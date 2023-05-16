@@ -18,5 +18,7 @@ The SDK only needs to cover the movie and quote endpoints:
 
 - uses `ts-node` to run the entrypoint `src/index.ts`
 
+## SDK Design and Usage
+Please read [Design and Usage Documentation](https://github.com/supernihal/nihal_razak_SDK/blob/main/design.md) carefully.
 ## Test
 `npm run test`

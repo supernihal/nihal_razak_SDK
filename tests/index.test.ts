@@ -79,7 +79,7 @@ jest.mock("../src/MovieAPI", () => ({
       docs: mockMovies,
     }),
     getMovieById: jest.fn().mockResolvedValue({ docs: [mockMovies[0]] }),
-    getMovieQuotes: jest.fn().mockResolvedValue({ docs: [mockMovieQuotes] }),
+    getMovieQuotes: jest.fn().mockResolvedValue({ docs: mockMovieQuotes }),
   })),
 }));
 
@@ -115,7 +115,7 @@ describe("LordOfTheRingsSDK", () => {
   it("should get movie quotes", async () => {
     const sdk = new LordOfTheRingsSDK(accessToken);
     const {
-      docs: [movieQuotes],
+      docs: movieQuotes,
     } = await sdk.getMovieQuotes("movie-id");
     expect(movieQuotes).toEqual(mockMovieQuotes);
   });

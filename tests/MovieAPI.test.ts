@@ -6,8 +6,8 @@ describe("MovieAPI", () => {
   const movieAPI = new MovieAPI(token);
 
   const mockParams: MovieAPIParams = {
-    offset: 1,
-    page:2,
+    page: 2,
+    limit: 5,
     sort: 'name:asc',
   }
 
@@ -47,8 +47,25 @@ describe("MovieAPI", () => {
     expect(movieQuotes.pages).toBeGreaterThan(0);
   });
 
-  it("should fetch movies based on query params",async  () => {
+  it("should fetch movies based on query params without offset", async  () => {
     const movies = await movieAPI.getMovies(mockParams);
+    expect(movies.page).toBe(mockParams.page);
+    expect(movies.pages).toBe(Math.round(movies.total / (mockParams.limit ?? 1)));
+    expect(movies.limit).toBe(mockParams.limit);
   });
 
+  it("should fetch movies based on query params with offset", async  () => {
+    const mockOffset = 4;
+    const movies = await movieAPI.getMovies({
+      ...mockParams,
+      offset: mockOffset,
+    });
+    expect(movies.limit).toBe(mockParams.limit);
+    expect(movies.docs).toHaveLength(Math.min(movies.total - mockOffset, (mockParams.limit ?? 1)));
+  });
+
+  it("should return empy docs when limit is 0", async () => {
+    const movies = await movieAPI.getMovies({ limit: 0 });
+    expect(movies.docs).toHaveLength(0);
+  });
 });

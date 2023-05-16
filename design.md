@@ -15,7 +15,7 @@ The SDK is designed as a wrapper around the Lord of the Rings API, providing a s
 
 The Lord of the Rings SDK can be installed using npm. Run the following command to install the SDK package:
 
-`npm install lord-of-the-rings-sdk` 
+`npm install nihal-razak-lord-of-the-rings-sdk` 
 
 ## Usage
 
@@ -31,23 +31,23 @@ To use the Lord of the Rings SDK in your application, follow these steps:
 
     -   Get a list of movies:
         
-        `const movies: Movie[] = await sdk.getMovies();` 
+        `const { docs: movies } = await sdk.getMovies();` 
         
     -   Get a movie by ID:
         
-        `const movie: Movie = await sdk.getMovieById('movie-id');` 
+        `const { docs: [movie] } = await sdk.getMovieById('movie-id');` 
         
     -   Get quotes for a movie:
         
-        `const quotes: string[] = await sdk.getMovieQuotes('movie-id');` 
+        `const { docs: movieQuotes } = await sdk.getMovieQuotes('movie-id');` 
         
     -   Get a list of quotes:
         
-        `const quotes: Quote[] = await sdk.getQuotes();` 
+        `const { docs: quotes } = await sdk.getQuotes();` 
         
     -   Get a quote by ID:
         
-        `const quote: Quote = await sdk.getQuoteById('quote-id');` 
+        `const { docs: [quote] }  = await sdk.getQuoteById('quote-id');` 
         
     -   Get movies with pagination, sorting, and filtering:
         
@@ -55,10 +55,10 @@ To use the Lord of the Rings SDK in your application, follow these steps:
           limit: 10,
           page: 2,
           sort: 'name:asc',
-          name: 'The Fellowship of the Ring',
+          name: 'Gandalf',
         };`
         
-        `const movies: Movie[] = await sdk.getMovies(params);` 
+        `const { docs: movies } = await sdk.getMovies(params);` 
         
         You can provide appropriate values for pagination, sorting, and filtering options based on the API documentation.
         
